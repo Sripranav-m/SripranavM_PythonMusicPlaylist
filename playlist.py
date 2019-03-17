@@ -138,31 +138,17 @@ def playpause_song():
     global threadlist
 
     if p=='0':
-        try:
-            if new_index==-5:
-                file_name=playlist.curselection()
-                file_name=int(file_name[0])
-                ini=file_name
-                file_name=playlist_list[file_name]
-                #h=0
+        try: 
+            file_name=playlist.curselection()
+            file_name=int(file_name[0])
+            ini=file_name
+            file_name=playlist_list[file_name]     
             p='1'
             if mixer.music.get_busy():
                     mixer.music.stop()
                     time.sleep(1)
             else:
-                time.sleep(1)
-            check=playlist.curselection()
-            check=int(a[0])
-            if(check==-1):
-                file_name=playlist.curselection()
-                file_name=int(file_name[0])
-                ini=file_name
-                file_name=playlist_list[file_name]
-            if(check==0):
-                file_name=playlist.curselection()
-                file_name=int(file_name[0])
-                ini=file_name
-                file_name=playlist_list[file_name]
+                time.sleep(1)          
             mixer.music.load(file_name)           
             mixer.music.play()
             new_index=-5
@@ -207,7 +193,7 @@ def playpause_song():
     elif p=='1':
         try:
             fin=playlist.curselection()
-            fin=int(fin[0])      
+            fin=int(fin[0])
             if fin!=ini:
                 p='0'
                 mixer.music.stop()
@@ -229,6 +215,7 @@ def playpause_song():
                 mixer.music.stop()
                 time.sleep(1)
                 playpause_song()
+
             else:
                 p='1'
                 mixer.music.unpause()
@@ -272,14 +259,16 @@ def back_ward():
         ##print(playlist.curselection())
         new_index=int(new_index[0])
         if new_index >0:
-            new_index-=1          
+            new_index-=1
+            
             p='0'
             new_file_name=playlist_list[new_index]
             file_name=new_file_name
             playlist.selection_clear(new_index+1)
             playlist.selection_set(new_index)
             mixer.music.stop()
-            time.sleep(1)        
+            time.sleep(1)
+            
             playpause_song()
     except:
         tkinter.messagebox.showerror("Error","Error")
